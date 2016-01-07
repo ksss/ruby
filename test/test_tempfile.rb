@@ -325,6 +325,15 @@ puts Tempfile.new('foo').path
     end
   end
 
+  def test_create_default_basename
+    path = nil
+    Tempfile.create {|f|
+      path = f.path
+      assert(File.exist?(path))
+    }
+    assert(!File.exist?(path))
+  end
+
   def test_create_with_block
     path = nil
     Tempfile.create("tempfile-create") {|f|
